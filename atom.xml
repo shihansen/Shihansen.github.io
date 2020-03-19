@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://shihansen.github.io</id>
-    <title>蒟蒻的blog</title>
-    <updated>2020-03-19T14:29:07.278Z</updated>
+    <title>A vegetable dog&apos;sblog</title>
+    <updated>2020-03-19T14:30:54.094Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://shihansen.github.io"/>
     <link rel="self" href="https://shihansen.github.io/atom.xml"/>
     <subtitle>相信柯学</subtitle>
     <logo>https://shihansen.github.io/images/avatar.png</logo>
     <icon>https://shihansen.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, 蒟蒻的blog</rights>
+    <rights>All rights reserved 2020, A vegetable dog&apos;sblog</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://shihansen.github.io/post/hello-gridea/</id>
