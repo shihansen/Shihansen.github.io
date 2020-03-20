@@ -94,3 +94,7 @@ a {
     .header {background-image: url(https://ftp.bmp.ovh/imgs/2020/03/795f5f5d995a9e89.jpg);}
     .index-img{ background-image: url(https://ftp.bmp.ovh/imgs/2020/03/795f5f5d995a9e89.jpg);}
     
+      .v {
+        display: none;
+      }
+    
