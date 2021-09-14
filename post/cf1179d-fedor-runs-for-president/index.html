@@ -1,0 +1,265 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CF1179D Fedor Runs for President | A vegetable dog&#39;s blog</title>
+<link rel="shortcut icon" href="https://shihansen.github.io/favicon.ico?v=1631590479484">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://shihansen.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="CF1179D Fedor Runs for President | A vegetable dog&#39;s blog - Atom Feed" href="https://shihansen.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一道斜率优化的好题，别的题解也说得很清楚了，容斥一下单调队列维护凸壳一下就好了，但明显的斜率优化相对于下面的做法比较复杂。
+首先考虑猜结论，显然手玩样例会发现最后都是一条链加上一条边构成一个环，我们设 sizxsiz_xsizx​ 是 xx..." />
+    <meta name="keywords" content="题解" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://shihansen.github.io">
+  <img class="avatar" src="https://shihansen.github.io/images/avatar.png?v=1631590479484" alt="">
+  </a>
+  <h1 class="site-title">
+    A vegetable dog&#39;s blog
+  </h1>
+  <p class="site-description">
+    相信柯学
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              CF1179D Fedor Runs for President
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-09-14
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://shihansen.github.io/tag/NZX-9DPI8/" class="post-tag">
+                  # 题解
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>一道斜率优化的好题，别的题解也说得很清楚了，容斥一下单调队列维护凸壳一下就好了，但明显的斜率优化相对于下面的做法比较复杂。</p>
+<p>首先考虑猜结论，显然手玩样例会发现<strong>最后都是一条链加上一条边构成一个环</strong>，我们设 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>i</mi><msub><mi>z</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">siz_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.80952em;vertical-align:-0.15em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 的子树大小，如果连接了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi><mo separator="true">,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span>，那么<strong>该路径上不同子树之间的点相互访问的简单路径增加了一条</strong>，那么答案增加了  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><mrow><mo fence="true">(</mo><mi>n</mi><mo>−</mo><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi><mrow><mo fence="true">[</mo><mi>i</mi><mo fence="true">]</mo></mrow><mo fence="true">)</mo></mrow><mo>×</mo><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi><mrow><mo fence="true">[</mo><mi>i</mi><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">\sum\left(n-size\left[i\right]\right)\times size\left[i\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathdefault">i</span><span class="mclose delimcenter" style="top:0em;">]</span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathdefault">i</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 是该路径上的点。</p>
+<p>显然要最小化 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi><msup><mrow><mo fence="true">[</mo><mi>i</mi><mo fence="true">]</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sum size\left[i\right]^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.204018em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathdefault">i</span><span class="mclose delimcenter" style="top:0em;">]</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>，然后易证连接的点必然是叶子或根，否则使其再向子树扩展得到的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi><msup><mrow><mo fence="true">[</mo><mi>i</mi><mo fence="true">]</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sum size\left[i\right]^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.204018em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathdefault">i</span><span class="mclose delimcenter" style="top:0em;">]</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> 更小。</p>
+<p>那么根据λᴉʍ大佬的说法，我们<strong>用求直径的方法求两次就好了</strong>。关于为什么这么可以，我<strong>一时间也没有很好地证明</strong>。其实关于直径的方法<strong>我也是看了题解才知道</strong>，最开始的思路只停留在上面。如果<strong>希望正解的还是最好去写斜率优化</strong>，可以看出最后树的直径相较于斜率优化在运行时间上差很多。</p>
+<p>贴个Code吧，<code>Pre()</code> 是关于子树的处理，<code>dfs()</code> 是答案的统计，存树用的是链式前向星</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define vv (e[i].v)
+#define Maxn 500007
+inline int read(){
+   register int s=0,w=1;
+   char ch=getchar();
+   while(ch&lt;'0'||ch&gt;'9'){if(ch=='-')w=-1;ch=getchar();}
+   while(ch&gt;='0'&amp;&amp;ch&lt;='9')s=s*10+ch-'0',ch=getchar();
+   return s*w;
+}
+using namespace std ;
+ll n , head[Maxn] , tot , ans[Maxn] , siz[Maxn] , u , v , Maxi ;
+struct Edge
+{
+	int v , next ;
+}e[Maxn &lt;&lt; 1] ;
+void add(int u , int v)
+{
+	e[++ tot].v = v ;
+	e[tot].next = head[u] ;
+	head[u] = tot ;
+}
+void Pre(int now , int last)
+{
+	siz[now] = 1 ;
+	for(int i = head[now] ; i ;i = e[i].next)
+	{
+		if(vv == last) continue ;
+		Pre(vv , now) ;
+		siz[now] += siz[vv] ;
+	}
+}
+void dfs(int now , int last)
+{
+	for(int i = head[now] ; i ;i = e[i].next)
+	{
+		if(vv == last) continue ;
+		//Pre(vv , now) ;
+		ans[vv] = ans[now] + (siz[now] - siz[vv]) * siz[vv] ;
+		dfs(vv , now) ;
+	}	
+}
+void MaxF()
+{
+	Maxi = 1 ;
+	for(int i = 1 ; i &lt;= n ; i ++) Maxi = (ans[Maxi] &lt; ans[i]) ? i : Maxi ;
+}
+int main()
+{
+	n = read() ;
+	for(int i = 1 ; i &lt;= n - 1 ; i ++)
+	{
+		u = read() ; v = read() ;
+		add(u , v) ;
+		add(v , u) ;
+	}
+	Pre(1 , -1) ;
+	ans[1] = n * (n - 1) / 2 ;
+	dfs(1 , -1) ;
+	MaxF() ;
+	Pre(Maxi , 0) ;
+	ans[Maxi] = ans[1] ;
+	dfs(Maxi , 0) ;
+	MaxF() ;
+	cout &lt;&lt; ans[Maxi] ;
+	return 0 ; 
+} 
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://shihansen.github.io/post/p1943-localmaxima/">
+              <h3 class="post-title">
+                P1943 LocalMaxima
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'e27809d1a4c70c8671f7',
+    clientSecret: '41cdcc880f449b3d473717616770b9961628b631',
+    repo: 'pl',
+    owner: 'shihansen',
+    admin: ['shihansen'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+
+    
+  <a class="rss" href="https://shihansen.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
